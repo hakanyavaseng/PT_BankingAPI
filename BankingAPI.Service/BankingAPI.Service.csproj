@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BankingAPI.Core\BankingAPI.Core.csproj" />
+    <ProjectReference Include="..\BankingAPI.Data\BankingAPI.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
 </Project>

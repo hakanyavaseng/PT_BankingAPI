@@ -18,7 +18,7 @@ namespace BankingAPI.Service
             services.AddScoped<IServiceManager, ServiceManager>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICustomerService, CustomerService>();
-            //services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<ICreditCardService, CreditCartService>();
             services.AddScoped<IDebitCardService, DebitCartService>();
         }

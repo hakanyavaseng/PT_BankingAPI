@@ -4,7 +4,7 @@
     {
         IAccountService AccountService { get; }
         ICustomerService CustomerService { get; }
-        //ITransactionService TransactionService { get; }
+        ITransactionService TransactionService { get; }
         ICreditCardService CreditCardService { get; }
         IDebitCardService DebitCardService { get; }
     }

@@ -4,13 +4,13 @@ namespace BankingAPI.Core.Entities
 {
     public class CreditCard : BaseEntity
     {
-        public string CardNumber { get; init; }
-        public short ExpiryMonth { get; init; }
-        public short ExpiryYear { get; init; }
+        public string CardNumber { get; set; }
+        public short ExpiryMonth { get; set; }
+        public short ExpiryYear { get; set; }
         public DateTime ExpiryDate => new(ExpiryYear, ExpiryMonth, 1);
-        public decimal Limit { get; init; }
-        public short CVV { get; init; }
-        public int CustomerId { get; init; }
-        public Customer Customer { get; init; }
+        public decimal Limit { get; set; }
+        public short CVV { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using BankingAPI.Data.Repositories.Interfaces;
 using BankingAPI.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace BankingAPI.Service
+namespace BankingAPI.Service.Concretes
 {
     public class TransactionService : ITransactionService
     {
@@ -135,7 +135,7 @@ namespace BankingAPI.Service
             }
         }
 
-      
+
         public async Task<ListTranscationDto> GetTransactionByIdAsync(int id)
         {
             if (id <= 0)
@@ -166,7 +166,7 @@ namespace BankingAPI.Service
             IList<Transaction> transactions = await _repositoryManager.GetReadRepository<Transaction>().GetAllAsync();
             List<ListTranscationDto> dtos = new();
 
-            foreach(var transcation in transactions)
+            foreach (var transcation in transactions)
             {
                 dtos.Add(new ListTranscationDto()
                 {

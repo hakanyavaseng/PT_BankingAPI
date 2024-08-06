@@ -1,6 +1,6 @@
 ﻿using BankingAPI.Service.Interfaces;
 
-namespace BankingAPI.Service
+namespace BankingAPI.Service.Concretes
 {
     public class ServiceManager : IServiceManager
     {
@@ -12,10 +12,10 @@ namespace BankingAPI.Service
         private readonly IDebitCardService _debitCardService;
         #endregion
         public ServiceManager(
-            IAccountService accountService, 
-            ICustomerService customerService, 
+            IAccountService accountService,
+            ICustomerService customerService,
             ITransactionService transactionService,
-            ICreditCardService creditCardService, 
+            ICreditCardService creditCardService,
             IDebitCardService debitCardService)
         {
             _accountService = accountService;

@@ -8,7 +8,7 @@ using BankingAPI.Service.Mapping;
 using Microsoft.EntityFrameworkCore;
 using SinKien.IBAN4Net;
 
-namespace BankingAPI.Service
+namespace BankingAPI.Service.Concretes
 {
     public class AccountService : IAccountService
     {
@@ -22,12 +22,12 @@ namespace BankingAPI.Service
 
         public async Task<int> CreateAccountAsync(CreateAccountDto accountDto)
         {
-            if (accountDto is null) 
-                throw new ArgumentNullException(nameof(accountDto)); 
+            if (accountDto is null)
+                throw new ArgumentNullException(nameof(accountDto));
 
             //Customer check
             Customer? customer = await repositoryManager.GetReadRepository<Customer>().GetAsync(c => c.Id.Equals(accountDto.CustomerId));
-            if(customer is null)
+            if (customer is null)
                 throw new Exception("Girilen ID'ye ait kullanıcı kaydı bulunamadı.");
 
             //Mapping
@@ -56,9 +56,9 @@ namespace BankingAPI.Service
             if (account is null)
                 throw new Exception("Girilen ID'ye ait hesap kaydı bulunamadı.");
 
-            await repositoryManager.GetWriteRepository<Account>().DeleteAsync(account);  
+            await repositoryManager.GetWriteRepository<Account>().DeleteAsync(account);
             int result = await repositoryManager.SaveAsync();
-            return result>0;
+            return result > 0;
         }
 
         public async Task<AccountListDto> GetAccountByIdAsync(int id)
@@ -72,7 +72,7 @@ namespace BankingAPI.Service
         public async Task<IEnumerable<AccountListDto>> GetAccountsAsync()
         {
             IList<Account> accounts = await repositoryManager.GetReadRepository<Account>().GetAllAsync(include: p => p.Include(c => c.Customer));
-            return mapper.Map<IEnumerable<Account>, IEnumerable<AccountListDto>>(accounts);      
+            return mapper.Map<IEnumerable<Account>, IEnumerable<AccountListDto>>(accounts);
         }
 
         public async Task<bool> UpdateAccountAsync(UpdateAccountDto dto)
@@ -86,7 +86,7 @@ namespace BankingAPI.Service
 
             await repositoryManager.GetWriteRepository<Account>().UpdateAsync(account);
             int result = await repositoryManager.SaveAsync();
-            return result > 0;          
+            return result > 0;
         }
     }
 }

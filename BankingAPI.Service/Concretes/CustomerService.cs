@@ -5,7 +5,7 @@ using BankingAPI.Data.Repositories.Interfaces;
 using BankingAPI.Service.Interfaces;
 using System.Security.Cryptography;
 
-namespace BankingAPI.Service
+namespace BankingAPI.Service.Concretes
 {
     public class CustomerService : ICustomerService
     {
@@ -23,7 +23,7 @@ namespace BankingAPI.Service
 
 
             Customer customerToAdd = _mapper.Map<CreateCustomerDto, Customer>(dto);
-            
+
             //Check unique TCNumber
             Customer? customer = await _repositoryManager.GetReadRepository<Customer>().GetAsync(c => c.TCNumber.Equals(dto.TCNumber));
             if (customer is not null)
@@ -35,7 +35,7 @@ namespace BankingAPI.Service
 
         public async Task<bool> DeleteCustomerAsync(int id)
         {
-            if(id <= 0)
+            if (id <= 0)
                 throw new Exception("Invalid Id.");
 
             var customer = await _repositoryManager.GetReadRepository<Customer>().GetAsync(c => c.Id.Equals(id));
@@ -49,7 +49,7 @@ namespace BankingAPI.Service
 
         public async Task<ListCustomerDto> GetCustomerByIdAsync(int id)
         {
-            if(id<=0)
+            if (id <= 0)
                 throw new Exception("Invalid Id.");
 
             Customer? customer = await _repositoryManager.GetReadRepository<Customer>().GetAsync(c => c.Id.Equals(id));
@@ -67,9 +67,9 @@ namespace BankingAPI.Service
 
         public async Task<bool> UpdateCustomerAsync(UpdateCustomerDto dto)
         {
-            if(dto is null)
+            if (dto is null)
                 throw new ArgumentNullException(nameof(dto));
-            if(dto.Id <= 0)
+            if (dto.Id <= 0)
                 throw new Exception("Invalid Id.");
 
             var customerToUpdate = await _repositoryManager
@@ -82,7 +82,7 @@ namespace BankingAPI.Service
 
             await _repositoryManager.GetWriteRepository<Customer>().UpdateAsync(customerToUpdate);
             int result = await _repositoryManager.SaveAsync();
-            return result > 0;    
+            return result > 0;
         }
     }
 }

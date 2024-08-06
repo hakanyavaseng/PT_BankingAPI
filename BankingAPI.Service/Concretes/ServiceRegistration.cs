@@ -3,13 +3,13 @@ using BankingAPI.Service.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace BankingAPI.Service
+namespace BankingAPI.Service.Concretes
 {
     public static class ServiceRegistration
     {
         public static void AddServiceLayer(this IServiceCollection services)
         {
-            ConfigureMapping(services);
+            services.ConfigureMapping();
             RegisterServices(services);
         }
 
@@ -28,5 +28,5 @@ namespace BankingAPI.Service
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }
-   
+
 }

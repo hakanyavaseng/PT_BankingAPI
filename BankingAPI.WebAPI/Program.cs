@@ -1,10 +1,21 @@
 using BankingAPI.Data;
-using BankingAPI.Service;
+using BankingAPI.Service.Concretes;
+using BankingAPI.WebAPI.Filters;
 using BankingAPI.WebAPI.Middlewares;
+using FluentValidation.AspNetCore;
+using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers(cfg =>
+    {
+        cfg.Filters.Add<ValidationFilter>();
+    })
+    .AddFluentValidation(p =>
+    {
+        p.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

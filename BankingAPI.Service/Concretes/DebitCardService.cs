@@ -6,7 +6,7 @@ using BankingAPI.Service.Helpers;
 using BankingAPI.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace BankingAPI.Service
+namespace BankingAPI.Service.Concretes
 {
     public class DebitCartService : IDebitCardService
     {
@@ -86,10 +86,10 @@ namespace BankingAPI.Service
             if (dto.Id <= 0)
                 throw new Exception("Invalid debit card id");
 
-            if(dto.CustomerId <= 0)
+            if (dto.CustomerId <= 0)
                 throw new Exception("Invalid customer id");
 
-            if(dto.AccountId <= 0)
+            if (dto.AccountId <= 0)
                 throw new Exception("Invalid account id");
 
             var cardToUpdate = await repositoryManager.GetReadRepository<DebitCard>().GetAsync(p => p.Id.Equals(dto.Id));

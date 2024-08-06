@@ -25,7 +25,7 @@ namespace BankingAPI.Service
 
         public static void ConfigureMapping(this IServiceCollection services)
         {
-            services.AddSingleton<IMapper, Mapper>();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }
    

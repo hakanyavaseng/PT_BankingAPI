@@ -14,6 +14,15 @@ namespace BankingAPI.WebAPI.Controllers
             _serviceManager = serviceManager;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var account = await _serviceManager.AccountService.GetAccountByIdAsync(id);
+            if(account is not null)
+                return Ok(account);
+            return NotFound();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateAccountDto dto)
         {

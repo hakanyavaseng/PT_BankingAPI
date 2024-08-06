@@ -1,4 +1,5 @@
-﻿using BankingAPI.Core.DTOs.Accounts;
+﻿using AutoMapper;
+using BankingAPI.Core.DTOs.Accounts;
 using BankingAPI.Core.Entities;
 using BankingAPI.Data.Repositories.Interfaces;
 using BankingAPI.Service.Helpers;
@@ -60,9 +61,12 @@ namespace BankingAPI.Service
             return result>0;
         }
 
-        public Task<AccountListDto> GetAccountByIdAsync(int id)
+        public async Task<AccountListDto> GetAccountByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0)
+                throw new Exception(nameof(id));
+            Account account = await repositoryManager.GetReadRepository<Account>().GetAsync(a => a.Id.Equals(id), p => p.Include(c => c.Customer));
+            return mapper.Map<Account, AccountListDto>(account);
         }
 
         public Task<IEnumerable<AccountListDto>> GetAccountsAsync()

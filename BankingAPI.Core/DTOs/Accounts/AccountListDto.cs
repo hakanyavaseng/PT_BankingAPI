@@ -1,4 +1,6 @@
-﻿namespace BankingAPI.Core.DTOs.Accounts
+﻿using BankingAPI.Core.Entities;
+
+namespace BankingAPI.Core.DTOs.Accounts
 {
     public record AccountListDto
     {
@@ -8,6 +10,7 @@
         public string IBAN { get; init; }
         public long Balance { get; set; }
         public int CustomerId { get; init; }
+        public Customer Customer { get; init; }
         public DateTime CreatedAt { get; init; }
     }
 }

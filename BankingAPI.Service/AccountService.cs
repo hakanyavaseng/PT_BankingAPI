@@ -46,9 +46,18 @@ namespace BankingAPI.Service
             return await repositoryManager.SaveAsync();
         }
 
-        public Task<bool> DeleteAccountAsync(int id)
+        public async Task<bool> DeleteAccountAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0)
+                throw new ArgumentNullException(nameof(id));
+            var account = await repositoryManager.GetReadRepository<Account>().GetAsync(a => a.Id.Equals(id));
+
+            if (account is null)
+                throw new Exception("Girilen ID'ye ait hesap kaydı bulunamadı.");
+
+            await repositoryManager.GetWriteRepository<Account>().DeleteAsync(account);  
+            int result = await repositoryManager.SaveAsync();
+            return result>0;
         }
 
         public Task<AccountListDto> GetAccountByIdAsync(int id)

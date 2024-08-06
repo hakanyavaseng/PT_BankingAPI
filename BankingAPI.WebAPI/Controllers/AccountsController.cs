@@ -22,5 +22,14 @@ namespace BankingAPI.WebAPI.Controllers
                 return Ok(result);
             return BadRequest();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            bool result = await _serviceManager.AccountService.DeleteAccountAsync(id);
+            if(result)
+                return Ok(result);
+            return BadRequest();
+        }
     }
 }

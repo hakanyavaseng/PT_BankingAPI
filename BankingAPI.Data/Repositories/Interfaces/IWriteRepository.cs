@@ -1,0 +1,18 @@
+﻿using BankingAPI.Core.Entities.Common;
+using System.Linq.Expressions;
+
+namespace BankingAPI.Data.Repositories.Interfaces
+{
+    public interface IWriteRepository<T> where T : BaseEntity
+    {
+        //Create
+        Task<int> AddAsync(T entity);
+        Task<int> AddAsync(IEnumerable<T> entities);
+        //Update
+        Task<int> UpdateAsync(T entity);
+        int Update(T entity);
+        //Delete
+        Task<int> DeleteAsync(T entity);
+        Task<bool> DeleteAsync(Expression<Func<T, bool>> predicate);
+    }
+}

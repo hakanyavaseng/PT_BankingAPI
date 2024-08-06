@@ -4,12 +4,11 @@ namespace BankingAPI.Core.Entities
 {
     public class Account : BaseEntity
     {
-        public string AccountName { get; init; }
-        public string AccountNumber { get; init; }
-        public string IBAN { get; init; }
+        public string AccountName { get; set; }
+        public string AccountNumber { get; set; }
+        public string IBAN { get; set; }
         public long Balance { get; set; }
-        public DateTime AccountCreationDate { get; init; }
-        public int CustomerId { get; init; }
-        public Customer Customer { get; init; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

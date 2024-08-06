@@ -22,11 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BankingAPI.Data\BankingAPI.Data.csproj" />
+    <ProjectReference Include="..\BankingAPI.Service\BankingAPI.Service.csproj" />
   </ItemGroup>
 
 </Project>

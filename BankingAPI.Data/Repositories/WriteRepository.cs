@@ -14,54 +14,45 @@ namespace BankingAPI.Data.Repositories
         }
         protected DbSet<T> Table => context.Set<T>();
 
-        public virtual async Task<int> AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             await Table.AddAsync(entity);
-            return await context.SaveChangesAsync();
         }
 
-        public virtual async Task<int> AddAsync(IEnumerable<T> entities)
+        public virtual async Task AddAsync(IEnumerable<T> entities)
         {
             if (entities is not null && !entities.Any())
-                return 0;
+                return;
 
             await Table.AddRangeAsync(entities);
-            return await context.SaveChangesAsync();
         }
-        public virtual int Update(T entity)
+        public virtual void Update(T entity)
         {
             Table.Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
-
-            return context.SaveChanges();
         }
 
-        public virtual async Task<int> UpdateAsync(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
             Table.Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
-
-            return await context.SaveChangesAsync();
         }
-        public virtual async Task<int> DeleteAsync(T entity)
+        public virtual async Task DeleteAsync(T entity)
         {
             if (context.Entry(entity).State == EntityState.Detached)
                 Table.Attach(entity);
 
             Table.Remove(entity);
-
-            return await context.SaveChangesAsync();
         }
-        public virtual async Task<int> DeleteAsync(Guid id)
+        public virtual async Task DeleteAsync(Guid id)
         {
             var entity = await Table.FindAsync(id);
-            return await DeleteAsync(entity);
+            await DeleteAsync(entity);
         }
 
-        public virtual async Task<bool> DeleteAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task DeleteAsync(Expression<Func<T, bool>> predicate)
         {
             context.RemoveRange(Table.Where(predicate));
-            return await context.SaveChangesAsync() > 0;
         }
     }
 }

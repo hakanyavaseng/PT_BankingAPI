@@ -1,5 +1,6 @@
 ﻿using BankingAPI.Data.Contexts;
 using BankingAPI.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankingAPI.Data.Repositories
 {
@@ -10,6 +11,9 @@ namespace BankingAPI.Data.Repositories
         {
             this.context = context;
         }
+
+        public DbContext DbContext => context;
+
         public void Dispose() => context.Dispose();
         public async ValueTask DisposeAsync() => await context.DisposeAsync();
         public int Save() => context.SaveChanges();
@@ -32,5 +36,6 @@ namespace BankingAPI.Data.Repositories
         }
         IReadRepository<T> IRepositoryManager.GetReadRepository<T>() => new ReadRepository<T>(context);
         IWriteRepository<T> IRepositoryManager.GetWriteRepository<T>() => new WriteRepository<T>(context);
+
     }
 }

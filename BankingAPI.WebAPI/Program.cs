@@ -1,4 +1,5 @@
 using BankingAPI.Data;
+using BankingAPI.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -7,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDataLayer(builder.Configuration);
+builder.Services.AddServiceLayer();
 
 var app = builder.Build();
 

@@ -6,13 +6,13 @@ namespace BankingAPI.Data.Repositories.Interfaces
     public interface IWriteRepository<T> where T : BaseEntity
     {
         //Create
-        Task<int> AddAsync(T entity);
-        Task<int> AddAsync(IEnumerable<T> entities);
+        Task AddAsync(T entity);
+        Task AddAsync(IEnumerable<T> entities);
         //Update
-        Task<int> UpdateAsync(T entity);
-        int Update(T entity);
+        Task UpdateAsync(T entity);
+        void Update(T entity);
         //Delete
-        Task<int> DeleteAsync(T entity);
-        Task<bool> DeleteAsync(Expression<Func<T, bool>> predicate);
+        Task DeleteAsync(T entity);
+        Task DeleteAsync(Expression<Func<T, bool>> predicate);
     }
 }

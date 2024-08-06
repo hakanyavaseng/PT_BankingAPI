@@ -69,14 +69,24 @@ namespace BankingAPI.Service
             return mapper.Map<Account, AccountListDto>(account);
         }
 
-        public Task<IEnumerable<AccountListDto>> GetAccountsAsync()
+        public async Task<IEnumerable<AccountListDto>> GetAccountsAsync()
         {
-            throw new NotImplementedException();
+            IList<Account> accounts = await repositoryManager.GetReadRepository<Account>().GetAllAsync(include: p => p.Include(c => c.Customer));
+            return mapper.Map<IEnumerable<Account>, IEnumerable<AccountListDto>>(accounts);      
         }
 
-        public Task<bool> UpdateAccountAsync(UpdateAccountDto account)
+        public async Task<bool> UpdateAccountAsync(UpdateAccountDto dto)
         {
-            throw new NotImplementedException();
+            Account account = await repositoryManager.GetReadRepository<Account>().GetAsync(a => a.Id.Equals(dto.Id));
+
+            if (account is null)
+                throw new Exception("Girilen ID'ye ait hesap kaydı bulunamadı.");
+
+            mapper.Map(dto, account);
+
+            await repositoryManager.GetWriteRepository<Account>().UpdateAsync(account);
+            int result = await repositoryManager.SaveAsync();
+            return result > 0;          
         }
     }
 }

@@ -11,6 +11,6 @@ namespace BankingAPI.Core.DTOs.Cards.CreditCards
         public DateTime ExpiryDate => new(ExpiryYear, ExpiryMonth, 1);
         public int Limit { get; init; }
         public short CVV { get; init; }
-        public int CustomerId { get; init; }
+        public Customer Customer { get; init; }
     }
 }

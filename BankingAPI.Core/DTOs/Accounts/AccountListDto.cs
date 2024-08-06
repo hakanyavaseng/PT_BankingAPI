@@ -12,5 +12,6 @@ namespace BankingAPI.Core.DTOs.Accounts
         public int CustomerId { get; init; }
         public Customer Customer { get; init; }
         public DateTime CreatedAt { get; init; }
+        public bool IsActive { get; init; }
     }
 }

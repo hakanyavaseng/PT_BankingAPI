@@ -1,4 +1,6 @@
-﻿namespace BankingAPI.Core.DTOs.Cards.DebitCards
+﻿using BankingAPI.Core.Entities;
+
+namespace BankingAPI.Core.DTOs.Cards.DebitCards
 {
     public class ListDebitCardDto
     {
@@ -8,7 +10,7 @@
         public DateTime ExpiryDate { get; set; }
         public int Limit { get; set; }
         public short CVV { get; set; }
-        public int AccountId { get; set; }
         public int CustomerId { get; set; }
+        public int AccountId { get; set; }
     }
 }

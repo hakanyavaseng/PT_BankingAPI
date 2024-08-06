@@ -6,25 +6,29 @@ namespace BankingAPI.Service
     {
         #region Service fields
         private readonly IAccountService _accountService;
-        //private readonly ICustomerService _customerService;
+        private readonly ICustomerService _customerService;
         //private readonly ITransactionService _transactionService;
-        //private readonly ICreditCardService _creditCardService;
-        //private readonly IDebitCardService _debitCardService;
+        private readonly ICreditCardService _creditCardService;
+        private readonly IDebitCardService _debitCardService;
         #endregion
-        public ServiceManager(IAccountService accountService)
+        public ServiceManager(
+            IAccountService accountService, 
+            ICustomerService customerService, 
+            ICreditCardService creditCardService, 
+            IDebitCardService debitCardService)
         {
             _accountService = accountService;
-            //_customerService = customerService;
+            _customerService = customerService;
             //_transactionService = transactionService;
-            //_creditCardService = creditCardService;
-            //_debitCardService = debitCardService;
+            _creditCardService = creditCardService;
+            _debitCardService = debitCardService;
         }
         #region Service properties
         public IAccountService AccountService => _accountService;
-        //public ICustomerService CustomerService => _customerService;
+        public ICustomerService CustomerService => _customerService;
         //public ITransactionService TransactionService => _transactionService;
-        //public ICreditCardService CreditCardService => _creditCardService;
-        //public IDebitCardService DebitCardService => _debitCardService;
+        public ICreditCardService CreditCardService => _creditCardService;
+        public IDebitCardService DebitCardService => _debitCardService;
         #endregion
     }
 }

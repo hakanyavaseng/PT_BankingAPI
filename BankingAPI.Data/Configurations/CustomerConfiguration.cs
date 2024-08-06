@@ -35,6 +35,9 @@ namespace BankingAPI.Data.Configurations
                 .IsRequired()
                 .HasColumnType("decimal(18,2)")
                 .HasDefaultValue(10000.00m);
+
+            builder.Property(c => c.BirthDate)
+                .HasColumnType("date");
         }
 
     }

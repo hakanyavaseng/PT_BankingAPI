@@ -9,11 +9,13 @@ namespace BankingAPI.Service.Mapping.Configurations
         public AccountConfigurations()
         {
             CreateMap<CreateAccountDto, Account>();
+            CreateMap<UpdateAccountDto, Account>();
             CreateMap<Account, AccountListDto>()
                 .ForMember(p => p.Customer, options =>
                 {
                     options.MapFrom(src => src.Customer);
                 });
+
         }
     }
 }

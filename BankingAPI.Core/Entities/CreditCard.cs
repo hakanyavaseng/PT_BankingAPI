@@ -8,7 +8,7 @@ namespace BankingAPI.Core.Entities
         public short ExpiryMonth { get; init; }
         public short ExpiryYear { get; init; }
         public DateTime ExpiryDate => new(ExpiryYear, ExpiryMonth, 1);
-        public int Limit { get; init; }
+        public decimal Limit { get; init; }
         public short CVV { get; init; }
         public int CustomerId { get; init; }
         public Customer Customer { get; init; }

@@ -1,15 +1,16 @@
-﻿using BankingAPI.Core.DTOs.Accounts;
+﻿using BankingAPI.Core.DTOs.Customers;
 using BankingAPI.Service.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankingAPI.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountsController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
-        public AccountsController(IServiceManager serviceManager)
+        public CustomersController(IServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
         }
@@ -17,35 +18,34 @@ namespace BankingAPI.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var accounts = await _serviceManager.AccountService.GetAccountsAsync();
-            if(accounts is not null)
-                return Ok(accounts);
+            var customers = await _serviceManager.CustomerService.GetCustomersAsync();
+            if(customers is not null)
+                return Ok(customers);
             return NotFound();
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var account = await _serviceManager.AccountService.GetAccountByIdAsync(id);
-            if(account is not null)
-                return Ok(account);
+            var customer = await _serviceManager.CustomerService.GetCustomerByIdAsync(id);
+            if(customer is not null)
+                return Ok(customer);
             return NotFound();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateAccountDto dto)
+        public async Task<IActionResult> Create(CreateCustomerDto dto)
         {
-            int result = await _serviceManager.AccountService.CreateAccountAsync(dto);
+            int result = await _serviceManager.CustomerService.CreateCustomerAsync(dto);
             if(result > 0)
                 return Ok(result);
             return BadRequest();
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(UpdateAccountDto dto)
+        public async Task<IActionResult> Update(UpdateCustomerDto dto)
         {
-            bool result = await _serviceManager.AccountService.UpdateAccountAsync(dto);
+            bool result = await _serviceManager.CustomerService.UpdateCustomerAsync(dto);
             if(result)
                 return Ok(result);
             return BadRequest();
@@ -54,10 +54,12 @@ namespace BankingAPI.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            bool result = await _serviceManager.AccountService.DeleteAccountAsync(id);
+            bool result = await _serviceManager.CustomerService.DeleteCustomerAsync(id);
             if(result)
                 return Ok(result);
             return BadRequest();
         }
+
+
     }
 }
